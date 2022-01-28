@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2451311287448155179}
   - component: {fileID: 2451311287448155178}
+  - component: {fileID: 2451311287448155177}
   - component: {fileID: 2451311287448155176}
   - component: {fileID: 1909124638284752013}
   - component: {fileID: 4617010536105018828}
-  - component: {fileID: 8759875914227841125}
   - component: {fileID: 1600927571470872140}
   m_Layer: 0
-  m_Name: PlanetBeforeExp
+  m_Name: PlanetZero 1
   m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2451311287448155182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.30354828, y: 1.38, z: 0}
-  m_LocalScale: {x: 1, y: 0.9, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -44,6 +44,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2451311287448155182}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2451311287448155177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2451311287448155182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4cedd0cd791303428fa05238037e39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expMultiplier: 6
+  pop: {fileID: 8300000, guid: 237b05d969db90842ac1475892b63b0d, type: 3}
 --- !u!23 &2451311287448155176
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +77,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fbfd141c43dd17149bb8eea218fa91ca, type: 2}
+  - {fileID: 2100000, guid: 9c4689f690444a541920ec5d9e5ce429, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,21 +128,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8759875914227841125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2451311287448155182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbb27fe4c5a84b841a4feb67469902b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  touchesLeft: 0
-  explosionRadius: 2
-  explodedPlanet: {fileID: 5443407650184981355, guid: 532544c93e8f7e04e8968cdb62ae00ad, type: 3}
 --- !u!82 &1600927571470872140
 AudioSource:
   m_ObjectHideFlags: 0
@@ -139,7 +138,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 96d313111dd0b604e90abde4f1ce58b4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 636b3b0db189d764b9dfd39fa455ea29, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

@@ -51,7 +51,7 @@ public class PlanetExplode : MonoBehaviour
 
         if (collision.gameObject.tag == "Planet" || collision.gameObject.tag == "Exploded" )
         {
-            Debug.Log("Collision!");
+            //Debug.Log("Collision!");
             
             CreateExplodedPlanet(gameObject);
             //ExplodePlanet(collision.gameObject);
@@ -70,7 +70,7 @@ public class PlanetExplode : MonoBehaviour
         
         
         
-        Debug.Log(targetColor);
+        //Debug.Log(targetColor);
         Destroy(target);
         GameObject inst = Instantiate(explodedPlanet,pos,transform.rotation);
         foreach (Renderer child in inst.GetComponentsInChildren<Renderer>())

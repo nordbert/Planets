@@ -13,12 +13,15 @@ public class GameManager : MonoBehaviour
 
     private float multiplier;
 
+    public Text liteText;
     public Text touchText;
     public Text record;
     public Text remainingPlanets;
     public Text waveCounter;
     public Button restartButton;
     public Button quitButton;
+
+    public bool isLiteVersion = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,31 +74,53 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("GameExplode");
     }
 
-    public void CheckGameState()
-    {
-        CountWaves();
-        currentTouches = PlayerPrefs.GetInt("Touches");   
-        if ((GameObject.FindGameObjectsWithTag("ExplodingPlanet").Length != 0 && GameObject.FindGameObjectsWithTag("Planet").Length != 0) || (currentTouches != 0 && GameObject.FindGameObjectsWithTag("Planet").Length != 0))
-        {
-            Debug.Log(GameObject.FindGameObjectsWithTag("ExplodingPlanet").Length);
-           // Debug.Log("Game is running");
-        }
-        else if (GameObject.FindGameObjectsWithTag("Planet").Length > 0 && GameObject.FindGameObjectsWithTag("ExplodingPlanet").Length ==0 && currentTouches == 0 )
-        {
-            //Debug.Log("You lose.");
-            StopAllCoroutines();
-            restartButton.gameObject.SetActive(true);
-            quitButton.gameObject.SetActive(true);
-        }
-        else if (GameObject.FindGameObjectsWithTag("Planet").Length ==0 && GameObject.FindGameObjectsWithTag("ExplodingPlanet").Length ==0 )
-        {
+    //public void CheckGameState()
+    //{
+    //    CountWaves();
+    //    currentTouches = PlayerPrefs.GetInt("Touches");   
+    //    if ((GameObject.FindGameObjectsWithTag("ExplodingPlanet").Length != 0 && GameObject.FindGameObjectsWithTag("Planet").Length != 0) || (currentTouches != 0 && GameObject.FindGameObjectsWithTag("Planet").Length != 0))
+    //    {
+    //        Debug.Log(GameObject.FindGameObjectsWithTag("ExplodingPlanet").Length);
+    //       // Debug.Log("Game is running");
+    //    }
+    //    else if (GameObject.FindGameObjectsWithTag("Planet").Length > 0 && GameObject.FindGameObjectsWithTag("ExplodingPlanet").Length ==0 && currentTouches == 0 )
+    //    {
+    //        //Debug.Log("You lose.");
+    //        StopAllCoroutines();
+    //        restartButton.gameObject.SetActive(true);
+    //        quitButton.gameObject.SetActive(true);
+    //    }
+    //    else if (GameObject.FindGameObjectsWithTag("Planet").Length ==0 && GameObject.FindGameObjectsWithTag("ExplodingPlanet").Length ==0 )
+    //    {
             
-            NextWave();
-            //Debug.Log("You win!");
-        }
+    //        NextWave();
+    //        //Debug.Log("You win!");
+    //    }
         
 
         
+    //}
+
+    public void ShowInGameMenu()
+    {
+        restartButton.gameObject.SetActive(true);
+        quitButton.gameObject.SetActive(true);
+        if (isLiteVersion)
+        {
+            liteText.gameObject.SetActive(true);
+            //Show the LITE message.
+        }
+    }
+
+    public void HideInGameMenu()
+    {
+        restartButton.gameObject.SetActive(false);
+        quitButton.gameObject.SetActive(false);
+        if (isLiteVersion )
+        {
+            liteText.gameObject.SetActive(false);
+            //Show the LITE message.
+        }
     }
 
     public void CheckGameStats2()
@@ -110,14 +135,27 @@ public class GameManager : MonoBehaviour
         else if (GameObject.FindGameObjectsWithTag("Planet").Length > 0 && GameObject.FindGameObjectsWithTag("Exploded").Length == 0 && currentTouches == 0)
         {
             //Debug.Log("You lose.");
+            ShowInGameMenu();
             
-            restartButton.gameObject.SetActive(true);
-            quitButton.gameObject.SetActive(true);
         }
         else if (GameObject.FindGameObjectsWithTag("Planet").Length == 0 && GameObject.FindGameObjectsWithTag("Exploded").Length == 0)
         {
-
-            NextWave();
+            if (isLiteVersion)
+            {
+                if(currentWave == 8)
+                {
+                    ShowInGameMenu();
+                }
+                else
+                {
+                    NextWave();
+                }
+                
+            }
+            else
+            {
+                NextWave();
+            }
            // Debug.Log("You win!");
         }
 
@@ -126,8 +164,9 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        restartButton.gameObject.SetActive(false);
-        quitButton.gameObject.SetActive(false);
+        HideInGameMenu();
+        //restartButton.gameObject.SetActive(false);
+        //quitButton.gameObject.SetActive(false);
     }
 
     public void QuitGame() 
@@ -149,7 +188,7 @@ public class GameManager : MonoBehaviour
 
         //StopAllCoroutines();
         //Destroy temporarly objects if they exist
-        DestroyTempObjects();
+        //DestroyTempObjects();
         
 
 
@@ -162,8 +201,8 @@ public class GameManager : MonoBehaviour
             {
                 
                 GameObject.FindObjectOfType<Spawner>().planetCount -= 4;
-                multiplier = PlayerPrefs.GetFloat("Multiplier");
-                multiplier += 0.2f;
+                //multiplier = PlayerPrefs.GetFloat("Multiplier");
+                //multiplier += 0.2f;
                 PlayerPrefs.SetFloat("Multiplier",multiplier);
                 //GameObject.FindObjectOfType<Spawner>().Spawn();
             }

@@ -8,8 +8,11 @@ public class Spawner : MonoBehaviour
     public GameObject prefab;
     public GameObject coinPrefab;
     public GameObject sunPrefab;
+
+    public GameObject starPrefab;
     public GameObject[] spawnPoints;
-    public int planetCount=25;
+    public int planetCount;
+    public int starCount = 100;
     Vector2 spawnPosition = Vector2.zero;
     private float radius = 1f;
     private bool isCoinSpawned = false;
@@ -17,6 +20,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SpawnStars();
         Spawn();
         
        
@@ -65,6 +69,38 @@ public class Spawner : MonoBehaviour
             
         }
     }
+
+    public void SpawnStars()
+    {
+        int i = 0;
+        isCoinSpawned = false;
+        while (i < starCount)
+        {
+            float x = Random.Range(0.05f, 0.95f);
+            float y = Random.Range(0.05f, 0.95f);
+            float z = Random.Range(65.04f,120.05f);
+            Vector3 pos = new Vector3(x, y, z);
+            spawnPosition = Camera.main.ViewportToWorldPoint(pos);
+            //Debug.Log(spawnPosition);
+            if (DetectCollisions(spawnPosition) > 0)
+            {
+                continue;
+            }
+            else
+            {
+               
+                GameObject inst = Instantiate(starPrefab, spawnPosition, Quaternion.identity);
+                inst.transform.position = new Vector3 (inst.transform.position.x,inst.transform.position.y,z) ;
+                
+                i++;
+
+            }
+            //isCoinSpawned = false;
+
+
+        }
+    }
+
     public void SpawnSun()
     {
         
